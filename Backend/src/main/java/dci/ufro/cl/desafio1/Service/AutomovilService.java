@@ -1,17 +1,17 @@
 package dci.ufro.cl.desafio1.Service;
 
 import dci.ufro.cl.desafio1.Entity.Automovil;
-import dci.ufro.cl.desafio1.Repository.AutomovilRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 @Service
 
 public class AutomovilService {
+
     private final String[] BRANDS = {"Toyota", "Chevrolet", "Ford", "Nissan", "Mazda"};
     private final int[] YEARS = {2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023};
     private final String[] COLORS = {"Rojo", "Azul", "Blanco", "Negro", "Gris"};
@@ -24,8 +24,10 @@ public class AutomovilService {
     private final int[] CABINS = {1, 2};
     private final String[] SUNROOF = {"Si", "No"};
 
+    private List<Automovil> cars = new ArrayList<>();
+
     public List<Automovil> generateCars(int n) {
-        List<Automovil> cars = new ArrayList<>();
+        cars.clear();
         for (int i = 0; i < n; i++) {
             Automovil car = new Automovil();
             car.setId(i + 1);
@@ -49,7 +51,25 @@ public class AutomovilService {
         }
         return cars;
     }
-}
+
+    public List<String> getColores() {
+        return Arrays.asList(COLORS);
+    }
+
+    public List<Automovil> findByColor(String color) {
+        List<Automovil> result = new ArrayList<>();
+        for (Automovil car : cars) {
+            if (car.getColor().equalsIgnoreCase(color)) {
+                result.add(car);
+            }
+        }
+        return result;
+    }
+    }
+
+
+
+
 
 
 
